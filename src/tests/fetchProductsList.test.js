@@ -9,7 +9,7 @@ describe('Teste a função fetchProductsList', () => {
   });
 
   it('fetch é chamado ao executar fetchProductsList', () => {
-
+  expect
   });
 
   it('fetch é chamado com o endpoint correto ao executar fetchProductsList', () => {
