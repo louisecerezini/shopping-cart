@@ -2,8 +2,7 @@ export const fetchProduct = () => {
   // seu código aqui
 };
 
-const fetchProdutos = (produto) =>
-  fetch(`https://api.mercadolibre.com/sites/MLB/search?q=${produto}`);
+const fetchProdutos = (produto) => fetch(`https://api.mercadolibre.com/sites/MLB/search?q=${produto}`);
 
 export const fetchProductsList = async (produto) => {
   if (!produto) {
