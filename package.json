@@ -1,7 +1,6 @@
 {
   "name": "sd-0x-project-shopping-cart",
   "version": "1.0.0",
-  "type": "module",
   "main": "script.js",
   "scripts": {
     "start": "vite",
