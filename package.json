@@ -1,6 +1,7 @@
 {
   "name": "sd-0x-project-shopping-cart",
   "version": "1.0.0",
+  "type": "module",
   "main": "script.js",
   "scripts": {
     "start": "vite",
@@ -12,6 +13,7 @@
     "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json . --ext .js",
     "lint:styles": "stylelint *.css --config .stylelintrc.json --ignore-disables --allow-empty-input"
   },
+  
   "jest": {
     "coverageReporters": [
       "text",
@@ -52,4 +54,5 @@
   "dependencies": {
     "vite": "^3.1.8"
   }
+  
 }
