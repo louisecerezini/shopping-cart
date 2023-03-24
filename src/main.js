@@ -22,10 +22,9 @@ window.onload = async () => {
     });
     container.removeChild(carregar);
     error.remove();
-  } catch (ex){
+  } catch (ex) {
     console.log(ex);
-    error.innerText =
-      'Algum erro ocorreu, recarregue a página e tente novamente';
+    error.innerText = 'Algum erro ocorreu, recarregue a página e tente novamente';
     error.className = 'error';
     cart.appendChild(error);
   }
