@@ -30,4 +30,8 @@ describe('Teste a função fetchProductsList', () => {
       new Error('Termo de busca não informado')
     );
   });
+
+  it('ao chamar a funcao fetchProductsList com categoria de produto invalida, retorna um erro tratado', async () => {
+    await expect(fetchProductsList('abc123')).rejects.toThrow(new Error('Erro ao buscar produtos'));
+  });
 });
