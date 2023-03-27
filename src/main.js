@@ -8,7 +8,7 @@ document.querySelector('.cep-button').addEventListener('click', searchCep);
 const productsElement = document.querySelector('.products');
 const container = document.querySelector('.container');
 const cart = document.querySelector('.cart');
-const cartElementList= document.querySelector('.cart__products');
+const cartElementList = document.querySelector('.cart__products');
 
 const carregar = document.createElement('p');
 const error = document.createElement('p');
@@ -16,24 +16,23 @@ carregar.innerText = 'carregando...';
 carregar.className = 'loading';
 container.appendChild(carregar);
 
-
 const saveCartIdCallback = async (productId) => {
-  const product= await fetchProduct(productId);
+  const product = await fetchProduct(productId);
   saveCartID(productId);
   const cartElement = createCartProductElement(product);
-  cartElementList.appendChild(cartElement); 
-}
+  cartElementList.appendChild(cartElement);
+};
 
 window.onload = async () => {
   try {
     const produtos = await fetchProductsList('computador');
     produtos.forEach((product) => {
       // cria a caixa toda com o elemento que representa o produto
-      const productElement = createProductElement(product); 
-      //pega o botao da caixa
-      let buttonElement = productElement.querySelector('.product__add');
-      //colocar o listener no onclick do botao passando como parametro o callback contendo uma chamada para o savecartid com o id do produto
-      buttonElement.addEventListener('click',() => saveCartIdCallback(product.id)); 
+      const productElement = createProductElement(product);
+      // pega o botao da caixa
+      const buttonElement = productElement.querySelector('.product__add');
+      // colocar o listener no onclick do botao passando como parametro o callback contendo uma chamada para o savecartid com o id do produto
+      buttonElement.addEventListener('click', () => saveCartIdCallback(product.id));
       productsElement.appendChild(productElement);
     });
     container.removeChild(carregar);
