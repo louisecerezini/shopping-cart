@@ -12,8 +12,8 @@ export const fetchProduct = async (id) => {
     return Promise.reject(new Error('Erro ao buscar produto'));
   }
 };
-//Note que o retorno da função getSavedCartIDs é um array de ids, 
-//você deve utilizar a função fetchProduct para cada um desses ids e recuperar as informações de cada produto.
+// Note que o retorno da função getSavedCartIDs é um array de ids,
+// você deve utilizar a função fetchProduct para cada um desses ids e recuperar as informações de cada produto.
 
 const fetchProdutos = (produto) => fetch(`https://api.mercadolibre.com/sites/MLB/search?q=${produto}`);
 

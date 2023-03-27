@@ -1,7 +1,10 @@
 import { searchCep } from './helpers/cepFunctions';
 import './style.css';
 import { fetchProduct, fetchProductsList } from './helpers/fetchFunctions';
-import { createCartProductElement, createProductElement } from './helpers/shopFunctions';
+import {
+  createCartProductElement,
+  createProductElement,
+} from './helpers/shopFunctions';
 import { getSavedCartIDs, saveCartID } from './helpers/cartFunctions';
 
 document.querySelector('.cep-button').addEventListener('click', searchCep);
@@ -22,6 +25,17 @@ const saveCartIdCallback = async (productId) => {
   const cartElement = createCartProductElement(product);
   cartElementList.appendChild(cartElement);
 };
+const carregarCart = async () => {
+  const savedCarts = getSavedCartIDs();
+  const productsPromise = savedCarts.map((id) => fetchProduct(id));
+
+  Promise.all(productsPromise).then((products) => {
+    products.forEach((product) => {
+      const productElement = createCartProductElement(product);
+      cartElementList.appendChild(productElement);
+    });
+  });
+};
 
 window.onload = async () => {
   try {
@@ -34,7 +48,7 @@ window.onload = async () => {
     });
     container.removeChild(carregar);
     error.remove();
-    await carregarCart(); 
+    await carregarCart();
   } catch (ex) {
     console.log(ex);
     error.innerText = 'Algum erro ocorreu, recarregue a página e tente novamente';
@@ -43,25 +57,11 @@ window.onload = async () => {
   }
 };
 
-const carregarCart= async() => {
-  const savedCarts= getSavedCartIDs(); 
-  const productsPromise =  savedCarts.map((id) => fetchProduct(id));
+// Ao carregar a página, o estado atual do carrinho de compras deve ser carregado do LocalStorage.
+// Para isso, você deve utilizar a função getSavedCartIDs, que já está implementada no arquivo helpers/cartFunctions.
 
-  Promise.all(productsPromise)
-  .then((products)=> {
-    products.forEach((product)=> {
-      const productElement = createCartProductElement(product);
-      cartElementList.appendChild(productElement); 
-    })
-  })
-    
-} 
+// Note que o retorno da função getSavedCartIDs é um array de ids,
+// você deve utilizar a função fetchProduct para cada um desses ids e recuperar as informações de cada produto.
 
-//Ao carregar a página, o estado atual do carrinho de compras deve ser carregado do LocalStorage. 
-//Para isso, você deve utilizar a função getSavedCartIDs, que já está implementada no arquivo helpers/cartFunctions.
-
-//Note que o retorno da função getSavedCartIDs é um array de ids, 
-//você deve utilizar a função fetchProduct para cada um desses ids e recuperar as informações de cada produto.
-
-//No entanto, é importante manter a ordem que os produtos foram adicionados ao carrinho, para isso, 
-//você deve utilizar o método Promise.all para aguardar a resposta de todas as requisições e só então adicionar os produtos ao carrinho.
+// No entanto, é importante manter a ordem que os produtos foram adicionados ao carrinho, para isso,
+// você deve utilizar o método Promise.all para aguardar a resposta de todas as requisições e só então adicionar os produtos ao carrinho.
