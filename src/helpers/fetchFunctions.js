@@ -27,9 +27,3 @@ export const fetchProductsList = async (produto) => {
     return Promise.reject(new Error('Erro ao buscar produtos'));
   }
 };
-
-// Por isso, é importante que você trate esse erro, exibindo uma mensagem para o usuário. Para isso:
-
-// Crie um elemento que contenha o texto Algum erro ocorreu, recarregue a página e tente novamente, que deve ser exibido em algum lugar da página;
-// Adicione a classe error ao elemento que possui o texto;
-// Exiba esse elemento apenas caso ocorra algum erro durante a requisição à API.
