@@ -40,6 +40,18 @@ export const getIdFromProduct = (product) => (
   product.querySelector('span.product__id').innerText
 );
 
+export const calculateCartSum =() => {
+  const cartElementList = document.querySelector('.cart__products');
+  const priceValuesElements = [...cartElementList.querySelectorAll('.product__price__value')]; 
+  const sum = priceValuesElements.reduce((acc,priceValue)=> acc+parseFloat(priceValue.innerText),0.00);
+  setCartSum (sum); 
+}
+
+export const setCartSum = (sum) => {
+  const totalPriceElement = document.querySelector('.total-price');
+  totalPriceElement.innerText = parseFloat(sum).toFixed(2); 
+}
+
 /**
  * Função que remove o produto do carrinho.
  * @param {Element} li - Elemento do produto a ser removido do carrinho.
@@ -48,6 +60,7 @@ export const getIdFromProduct = (product) => (
 const removeCartProduct = (li, id) => {
   li.remove();
   removeCartID(id);
+  calculateCartSum(); 
 };
 
 /**

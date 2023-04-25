@@ -2,8 +2,10 @@ import { searchCep } from './helpers/cepFunctions';
 import './style.css';
 import { fetchProduct, fetchProductsList } from './helpers/fetchFunctions';
 import {
+  calculateCartSum,
   createCartProductElement,
   createProductElement,
+  setCartSum
 } from './helpers/shopFunctions';
 import { getSavedCartIDs, saveCartID } from './helpers/cartFunctions';
 
@@ -24,12 +26,17 @@ const saveCartIdCallback = async (productId) => {
   saveCartID(productId);
   const cartElement = createCartProductElement(product);
   cartElementList.appendChild(cartElement);
+  calculateCartSum(); 
 };
+
 const carregarCart = async () => {
   const savedCarts = getSavedCartIDs();
   const productsPromise = savedCarts.map((id) => fetchProduct(id));
 
   Promise.all(productsPromise).then((products) => {
+    const soma = products.reduce((acc, product) => acc + product.base_price, 0);
+    setCartSum(soma); 
+
     products.forEach((product) => {
       const productElement = createCartProductElement(product);
       cartElementList.appendChild(productElement);
